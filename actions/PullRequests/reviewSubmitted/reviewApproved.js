@@ -1,25 +1,23 @@
 module.exports = ({
   checkIfLabelAlreadyExists,
   issues,
-  context,
-  labels,
+  labels: {
+    numberOfApprovalsLabel,
+    numberOfApprovalsMinusOneLabel,
+  },
+  owner,
+  repo,
+  issue_number,
 }) => () => {
-  console.log('fuck off', labels.numberOfApprovalsLabel, labels.numberOfApprovalsMinusOneLabel);
-  context.log(
-    checkIfLabelAlreadyExists,
-    labels.numberOfApprovalsLabel,
-    labels.numberOfApprovalsMinusOneLabel,
-  );
-
-  if (checkIfLabelAlreadyExists({ label: labels.numberOfApprovalsMinusOneLabel })) {
-    issues.removeLabels(context.issue({
-      labels: [labels.numberOfApprovalsMinusOneLabel],
-    }));
+  if (checkIfLabelAlreadyExists({ label: numberOfApprovalsMinusOneLabel })) {
+    issues.removeLabels({
+      owner, repo, issue_number, labels: [numberOfApprovalsMinusOneLabel],
+    });
   }
 
-  if (!checkIfLabelAlreadyExists({ label: labels.numberOfApprovalsLabel })) {
-    issues.addLabels(context.issue({
-      labels: [labels.numberOfApprovalsLabel],
-    }));
+  if (!checkIfLabelAlreadyExists({ label: numberOfApprovalsLabel })) {
+    issues.addLabels({
+      owner, repo, issue_number, labels: [numberOfApprovalsLabel],
+    });
   }
 };

@@ -1,7 +1,7 @@
 module.exports = async ({
-  pullRequests, owner, repo, number,
+  pullRequests, owner, repo, pullNumber,
 }) => {
-  const { data: reviews } = await pullRequests.listReviews({ owner, repo, number });
+  const { data: reviews } = await pullRequests.listReviews({ owner, repo, pull_number: pullNumber });
 
   return [...new Set(
     reviews

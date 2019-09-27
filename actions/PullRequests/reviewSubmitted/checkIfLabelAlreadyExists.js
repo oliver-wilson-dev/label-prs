@@ -1,10 +1,10 @@
 module.exports = async ({
-  issues, owner, repo, number,
+  issues, owner, repo, issue_number,
 }) => {
   const { data: existingLabels } = await issues.listLabelsOnIssue({
     owner,
     repo,
-    number,
+    issue_number,
   });
 
   return ({ label }) => existingLabels.some(

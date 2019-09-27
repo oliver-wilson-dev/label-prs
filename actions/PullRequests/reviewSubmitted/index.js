@@ -14,7 +14,7 @@ module.exports = async (context) => {
         state: reviewState,
       },
       pull_request: {
-        number,
+        number: issue_number,
       },
       repository: {
         name: repo,
@@ -31,17 +31,14 @@ module.exports = async (context) => {
 
 
   const numberOfApprovals = await getNumberOfApprovals({
-    pullRequests, owner, repo, number,
+    pullRequests, owner, repo, pullNumber: issue_number,
   });
 
   const numberOfApprovalsLabel = labels.DEV_APPROVALS[`${keyPrefix}${numberOfApprovals}`];
   const numberOfApprovalsMinusOneLabel = labels.DEV_APPROVALS[`${keyPrefix}${numberOfApprovals - 1}`];
 
-  console.log('labels: ', numberOfApprovalsLabel, numberOfApprovalsMinusOneLabel);
-
-
   const checkIfLabelAlreadyExistsCallback = await checkIfLabelAlreadyExists({
-    issues, owner, repo, number,
+    issues, owner, repo, issue_number,
   });
 
   const reviewTypeCallbackParams = {
@@ -52,6 +49,9 @@ module.exports = async (context) => {
       numberOfApprovalsLabel,
       numberOfApprovalsMinusOneLabel,
     },
+    owner,
+    repo,
+    issue_number,
   };
 
   const reviewTypes = getReviewTypes({

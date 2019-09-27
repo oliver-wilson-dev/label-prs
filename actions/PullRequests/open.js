@@ -35,7 +35,10 @@ module.exports = async (context) => {
     }
   });
 
-  return github.issues.addLabels(context.issue({
+
+  return github.issues.addLabels({
+    owner,
+    repo,
     labels: [DEV_APPROVALS_0],
-  }));
+  });
 };
