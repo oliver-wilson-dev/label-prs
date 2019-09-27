@@ -47,5 +47,4 @@ module.exports = async (context) => {
     repo,
     labels: [DEV_APPROVALS_0],
   });
-  console.log('addLabels');
 };

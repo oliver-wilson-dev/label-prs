@@ -18,6 +18,9 @@ If you have suggestions for how label-prs could be improved, or want to report a
 
 For more, check out the [Contributing Guide](CONTRIBUTING.md).
 
+## Deployment and Hosting
+The app is hosted at `https://glitch.com/~label-pr` which is directly coupled to the repo of this project, so it inherits all changes.
+
 ## License
 
 [ISC](LICENSE) © 2019 oliver wilson <contact@oliverwilson.dev> (www.oliverwilson.dev)
