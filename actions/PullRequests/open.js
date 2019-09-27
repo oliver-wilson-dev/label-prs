@@ -10,6 +10,9 @@ module.exports = async (context) => {
     payload: {
       pull_request: {
         number: issue_number,
+        user: {
+          login,
+        },
       },
     },
     github,
@@ -46,5 +49,12 @@ module.exports = async (context) => {
     owner,
     repo,
     labels: [DEV_APPROVALS_0],
+  });
+
+  github.issues.addAssignees({
+    owner,
+    repo,
+    issue_number,
+    assignees: [login],
   });
 };
