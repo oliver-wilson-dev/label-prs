@@ -7,6 +7,11 @@ const DEV_APPROVALS_2 = labels.DEV_APPROVALS[`${keyPrefix}${2}`];
 
 module.exports = async (context) => {
   const {
+    payload: {
+      pull_request: {
+        number: issue_number,
+      },
+    },
     github,
   } = context;
 
@@ -36,9 +41,11 @@ module.exports = async (context) => {
   });
 
 
-  return github.issues.addLabels({
+  github.issues.addLabels({
+    issue_number,
     owner,
     repo,
     labels: [DEV_APPROVALS_0],
   });
+  console.log('addLabels');
 };
