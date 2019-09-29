@@ -4,9 +4,9 @@
   "description": "adds labels to PRs based on the approvals",
   "author": "oliver wilson <contact@oliverwilson.dev> (www.oliverwilson.dev)",
   "license": "ISC",
-  "repository": "https://github.com//label-prs.git",
-  "homepage": "https://github.com//label-prs",
-  "bugs": "https://github.com//label-prs/issues",
+  "repository": "https://github.com/oliver-wilson-dev/label-prs.git",
+  "homepage": "https://github.com/oliver-wilson-dev/label-prs",
+  "bugs": "https://github.com/oliver-wilson-dev/label-prs/issues",
   "keywords": [
     "probot",
     "github",
@@ -15,9 +15,7 @@
   "scripts": {
     "dev": "nodemon",
     "start": "probot run ./index.js",
-    "lint": "standard --fix",
-    "test": "jest && standard",
-    "test:watch": "jest --watch --notify --notifyMode=change --coverage"
+    "lint": "eslint . --fix"
   },
   "dependencies": {
     "probot": "^9.5.0"
@@ -27,19 +25,11 @@
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^6.3.0",
     "eslint-plugin-import": "^2.18.2",
-    "jest": "^24.0.0",
-    "nock": "^10.0.0",
     "nodemon": "^1.17.2",
-    "smee-client": "^1.0.2",
-    "standard": "^12.0.1"
+    "smee-client": "^1.0.2"
   },
   "engines": {
     "node": ">= 8.3.0"
-  },
-  "standard": {
-    "env": [
-      "jest"
-    ]
   },
   "nodemonConfig": {
     "exec": "npm start",
@@ -47,8 +37,5 @@
       ".env",
       "."
     ]
-  },
-  "jest": {
-    "testEnvironment": "node"
   }
 }
