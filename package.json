@@ -1,7 +1,7 @@
 {
   "name": "label-prs",
   "version": "1.0.0",
-  "description": "adds labels to PRs based on the approvals",
+  "description": "Add labels to PRs based on the number of approvals. Automatically assign the creator of a PR to that PR.",
   "author": "oliver wilson <contact@oliverwilson.dev> (www.oliverwilson.dev)",
   "license": "ISC",
   "repository": "https://github.com/oliver-wilson-dev/label-prs.git",
