@@ -5,7 +5,7 @@ const getReviewTypes = require('./getReviewTypes');
 const checkIfLabelAlreadyExists = require('./checkIfLabelAlreadyExists');
 const getNumberOfApprovals = require('./getNumberOfApprovals');
 
-const { DEV_APPROVALS: { keyPrefix } } = labels;
+const { APPROVALS: { keyPrefix } } = labels;
 
 module.exports = async (context) => {
   const {
