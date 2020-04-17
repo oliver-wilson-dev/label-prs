@@ -40,4 +40,4 @@ The app is hosted at `https://glitch.com/~label-prs` which is directly coupled t
 
 ## License
 
-[ISC](LICENSE) © 2019 oliver wilson <contact@oliverwilson.dev> (www.oliverwilson.dev)
+[ISC](LICENSE) © 2020 oliver wilson <contact@oliverwilson.dev> (www.oliverwilson.dev)
