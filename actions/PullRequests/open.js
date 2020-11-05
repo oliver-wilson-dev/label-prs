@@ -1,9 +1,9 @@
+const getConfig = require('./getConfig');
+const addLabelsToRepo = require('./addLabelsToRepo');
 const { labels } = require('./constants');
 
-const { DEV_APPROVALS: { keyPrefix } } = labels;
-const DEV_APPROVALS_0 = labels.DEV_APPROVALS[`${keyPrefix}${0}`];
-const DEV_APPROVALS_1 = labels.DEV_APPROVALS[`${keyPrefix}${1}`];
-const DEV_APPROVALS_2 = labels.DEV_APPROVALS[`${keyPrefix}${2}`];
+const { APPROVALS: { keyPrefix } } = labels;
+const generateLabelName = ({ index }) => labels.APPROVALS[`${keyPrefix}${index}`];
 
 module.exports = async (context) => {
   const {
@@ -13,6 +13,9 @@ module.exports = async (context) => {
         user: {
           login,
         },
+        head: {
+          ref: branchName,
+        },
       },
     },
     github,
@@ -20,35 +23,37 @@ module.exports = async (context) => {
 
   const { owner, repo } = context.repo();
 
-  const { data: existingLabels } = await github.issues.listLabelsForRepo({
+  const {
+    labels: {
+      allApprovalsColour = '008000',
+      approvalColour = '0770CF',
+      noOfApprovalsRequired = 2,
+    },
+  } = await getConfig({
+    branchName,
+    github,
     owner,
     repo,
   });
 
-  [
-    { name: DEV_APPROVALS_0, color: 'DDDDDD' },
-    { name: DEV_APPROVALS_1, color: '0770CF' },
-    { name: DEV_APPROVALS_2, color: '008000' },
-  ].forEach((label) => {
-    const checkIfLabelAlreadyExists = existingLabels.some(
-      ({ name: existingLabelName }) => existingLabelName === label.name,
-    );
+  const APPROVALS_0 = { name: generateLabelName({ index: 0 }), color: 'DDDDDD' };
 
-    if (!checkIfLabelAlreadyExists) {
-      github.issues.createLabel({
-        ...label,
-        owner,
-        repo,
-      });
-    }
+  await addLabelsToRepo({
+    allApprovalsColour,
+    approvalColour,
+    generateLabelName,
+    github,
+    labelsToMake: [APPROVALS_0],
+    noOfApprovalsRequired,
+    owner,
+    repo,
   });
-
 
   github.issues.addLabels({
     issue_number,
     owner,
     repo,
-    labels: [DEV_APPROVALS_0],
+    labels: [APPROVALS_0],
   });
 
   github.issues.addAssignees({
